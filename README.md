@@ -55,11 +55,20 @@ All examples are based on my current work with **Escaly** (a SaaS for social imp
 <span style="background-color: grey">**`/case-studies`**</span>
 
 Readable write-ups that combine Escaly and SaaS learnings:
-* *“Designing an Activation Funnel for Early-Stage SaaS”*
-* *“Testing Freemium vs. Paid Entry in Social Sector SaaS”*
-* *“AI-Enabled Retention Strategies for Subscription Platforms”*
+* **[Escaly Activation Funnel](./case-studies/escaly-activation-funnel/README.md)**
+  * Defined activation as *first report generated within 7 days of signup*.
+  * Designed onboarding experiment (baseline vs. AI-guided flow).
+  * Built SQL notebook + dashboard to measure funnel conversion.
+  * Outcome: +20pp increase in activation (mock data).
 
 👉 Storytelling layer that connects technical work to product strategy.
+
+## 📂 Case Studies
+#### [Escaly Activation Funnel](./case-studies/escaly-activation-funnel/README.md)
+* Defined activation as *first report generated within 7 days of signup*.
+* Designed onboarding experiment (baseline vs. AI-guided flow).
+* Built SQL notebook + dashboard to measure funnel conversion.
+* Outcome: +20pp increase in activation (mock data).
 
 ## 🧩 Why This Portfolio Matters
 
