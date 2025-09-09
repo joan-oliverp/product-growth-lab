@@ -63,12 +63,41 @@ Readable write-ups that combine Escaly and SaaS learnings:
 
 👉 Storytelling layer that connects technical work to product strategy.
 
-## 📂 Case Studies
-#### [Escaly Activation Funnel](./case-studies/escaly-activation-funnel/README.md)
-* Defined activation as *first report generated within 7 days of signup*.
-* Designed onboarding experiment (baseline vs. AI-guided flow).
-* Built SQL notebook + dashboard to measure funnel conversion.
-* Outcome: +20pp increase in activation (mock data).
+## 🛣️ Roadmap & Status
+
+To provide transparency on what’s already implemented and what’s planned, here’s a high‑level roadmap. Items marked ✅ are complete; items marked ⏳ are in progress or queued for future sprints.
+
+### Case Studies
+* ✅ **Escaly Activation Funnel** – defined activation metric, designed onboarding experiment, and documented the results with insights.
+* ⏳ **Paywall Conversion** – upcoming study on trial-to-paid conversion; will include SQL analysis and experiment design.
+* ⏳ **Retention Cohorts** – planned analysis of retention curves and cohort behaviour.
+
+### Tracking Plan
+* ⏳ **tracking-plan-escaly/events.json** – define core events and properties for Escaly, including naming conventions and governance notes.
+* ⏳ **Instrumentation diagrams** – visual diagrams showing event flow across the activation funnel.
+
+### Dashboards & SQL
+
+* ⏳ **activation_funnel.sql** – write SQL to compute activation rate within 7 days.
+* ⏳ **retention_cohorts.sql** – build cohort analysis queries and corresponding charts.
+* ⏳ **paywall_conversion.sql** – explore trial-to-paid conversion metrics.
+
+### Growth Experiments
+
+* ⏳ **AB test templates** – create Markdown templates and notebooks for experiment design and sample size calculation.
+* ⏳ **Additional experiments** – document future experiments such as pricing page tests or onboarding variants.
+
+### Billing Sandbox
+
+* ⏳ **Stripe usage simulation** – build a Python script to simulate usage-based billing events.
+* ⏳ **Pricing scenarios** – outline alternative pricing/packaging strategies and their impact on revenue.
+
+### AI for Growth
+
+* ⏳ **Churn prediction prototype** – develop an initial notebook to model churn risk using mock engagement data.
+* ⏳ **Personalized onboarding** – experiment with AI-driven onboarding sequences tailored to user personas.
+
+You can follow these roadmap items through the repository’s commits and PRs. Each new artifact will update this checklist and include clear instructions so you can reproduce the results yourself.
 
 ## 🧩 Why This Portfolio Matters
 
