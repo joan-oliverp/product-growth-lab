@@ -1,62 +1,63 @@
-# Case Study: Designing Escaly’s Activation Funnel
+# Case Study: Escaly Activation Funnel
 
 ## 🎯 Context
-Escaly is a SaaS platform that digitalizes standardized social assessment scales (e.g., GENCAT, Barthel Index) for NGOs, care organizations, and foundations. Our target customers are traditionally conservative, with low digital adoption and limited budgets. At pre-launch, we needed to:
+Escaly is a SaaS platform that digitalizes standardized social assessment scales (e.g., GENCAT, Barthel Index) for NGOs and foundations.  
+Pre-launch testing revealed that users often stalled after signup, without completing their first assessment.
 
-1. Demonstrate time-to-value quickly.  
-2. Build confidence in replacing Excel/paper workflows.  
-3. Create a repeatable funnel that could scale across federations and associations.  
+---
 
-## 🛠️ Problem
-Our challenge: **users often signed up but stalled before completing their first assessment**. Without reaching this milestone, they couldn’t perceive Escaly’s value (automatic scoring, dashboards, reports).
+## 🛠 Problem
+Without completing an assessment and generating a report, users never reached the *value moment*.  
+This led to low early activation and unclear trial-to-paid signals.
+
+---
 
 ## 📐 Hypothesis
-If we streamline the onboarding process and guide users to complete their **first evaluation and generate one report**, activation will increase and trial-to-paid conversion will follow.
+If onboarding is streamlined and supported by an AI assistant, **more users will complete their first assessment and generate a report within 7 days of signup**.
 
-**Activation Metric (North Star for this experiment):**  
-👉 *A new account is considered “activated” when it completes one assessment and generates one report within the first 7 days.*
+**Activation Metric (v1):**  
+A user is considered *activated* when they generate their first report within 7 days of signup.
 
-## 📊 Funnel Design
-Proposed steps for activation funnel:
+---
 
-1. **Signup** – NGO admin registers via web form.  
-2. **Onboarding Tour** – Guided workflow shows how to create a first user & choose a scale.  
-3. **First Assessment** – Technician enters responses for a sample user.  
-4. **Report Generation** – Escaly outputs a PDF dashboard with automatic scoring.  
-5. **Value Moment** – User shares the report with a colleague or director.  
+## 📊 Experiment Design
+- **Cohort A (Baseline):** Manual onboarding with PDF instructions.  
+- **Cohort B (Experiment):** Interactive onboarding + AI assistant.  
 
-## 🔧 Instrumentation Plan
-Tracked Events (in JSON-style schema):
+Tracked funnel steps:
+1. Signup  
+2. CreateUser  
+3. SelectScale  
+4. SubmitAssessment  
+5. GenerateReport  
 
-```json
-[
-  {"event": "Signup", "properties": {"role": "Admin"}},
-  {"event": "CreateUser", "properties": {"count": 1}},
-  {"event": "SelectScale", "properties": {"scale": "GENCAT"}},
-  {"event": "SubmitAssessment", "properties": {"duration_sec": 240}},
-  {"event": "GenerateReport", "properties": {"report_type": "Individual"}}
-]
-```
-
-## 🧪 Experiment Setup
-- **Cohort A (Baseline):** Current onboarding flow (manual PDF instructions).  
-- **Cohort B (Experiment):** Interactive onboarding with inline guidance and AI-powered assistant.  
-
-**Hypothesis:** Cohort B will show a **+20% increase** in users reaching activation (report generated in <7 days).
+---
 
 ## 📈 Results (Mock Data)
-- Cohort A (n=20): 35% reached activation  
-- Cohort B (n=20): 55% reached activation  
-- Uplift: +20 percentage points (p < 0.1, directional but promising)  
+- Cohort A: 35% activated  
+- Cohort B: 55% activated  
+- **Uplift: +20 percentage points** (directional, p < 0.1)
+
+---
 
 ## 💡 Insights
-- Reducing onboarding friction matters more than feature depth.  
-- The *“value moment”* (sharing first report) is critical to securing organizational buy-in.  
-- AI assistant answered basic setup questions, cutting support requests by 30%.  
+- Reducing onboarding friction had more impact than adding new features.  
+- The *“share report”* step emerged as the key **value moment** for buy-in.  
+- AI assistant cut setup-related support tickets by ~30%.  
+
+---
 
 ## 🚀 Next Steps
-1. Expand interactive onboarding to all new users.  
-2. Automate trial-to-paid nudges triggered after report generation.  
-3. Instrument **“Shared Report”** as an advanced activation event.  
+1. Roll out interactive onboarding for all users.  
+2. Instrument `SharedReport` as an advanced activation milestone.  
+3. Trigger trial-to-paid nudges post-report generation.  
 
-✅ **Takeaway**: In early-stage SaaS, activation is the single most important funnel milestone. By focusing Escaly’s onboarding on *getting to the first report*, we improved trial engagement and set the stage for monetization.
+---
+
+## 📂 Artifacts
+- **Tracking Plan:** [`tracking-plan-escaly/events.json`](../../tracking-plan-escaly/events.json)  
+- **SQL Notebook:** [`dashboards/sql/activation-funnel.sql`](../../dashboards/sql/activation-funnel.sql)  
+- **Mock Data:** [`data/mock/events.csv`](../../data/mock/events.csv)  
+- **Figures:** ![Activation Funnel](../../figures/activation-funnel.png)
+
+---
