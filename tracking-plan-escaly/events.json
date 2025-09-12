@@ -1,0 +1,6 @@
+{
+  "$schema": "./events.schema.json",
+  "name": "Escaly Tracking Plan",
+  "version": "1.0.0",
+  "events": []
+}
