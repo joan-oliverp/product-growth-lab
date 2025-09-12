@@ -1,18 +1,18 @@
 # Product Growth Lab
 
-**A curated portfolio of SaaS & PLG technical case studies**
-
-*By Joan Oliver Poyatos*
+A public portfolio of **technical product management artifacts** in **B2B SaaS, subscription models, and product-led growth (PLG)**.  
+This repo showcases not just strategy, but **hands-on ability** to design instrumentation, run growth experiments, and analyze SaaS economics.
 
 ## 📌 Purpose
 
 This repository showcases my hands-on approach to building and scaling **B2B SaaS products with subscription models and product-led growth (PLG)**.
 
 It demonstrates not only strategic thinking as a Head of Product, but also the technical fluency needed to:
-* Design event tracking and data models
-* Run experiments and analyze product metrics
-* Integrate SaaS billing and APIs
-* Apply AI for growth, retention, and personalization
+* Define **event instrumentation** and activation funnels  
+* Design and analyze **growth experiments**  
+* Build **SQL dashboards** for retention, activation, and billing  
+* Prototype **AI-driven growth levers** (churn prediction, personalization)  
+* Simulate **SaaS billing and pricing models**
 
 All examples are based on my current work with **Escaly** (a SaaS for social impact organizations) and other B2B SaaS learnings. Where real data is not available, I use **mock datasets** to illustrate the approach.
 
