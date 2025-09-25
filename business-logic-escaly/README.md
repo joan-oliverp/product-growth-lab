@@ -13,3 +13,9 @@ This ensures that **product decisions drive instrumentation**, not the other way
 
 ## Contents
 - `business-logic.md` — canonical definitions of funnels, North Star metric, and key metrics.
+
+## Repo Flow
+![Escaly Repo Flow](../tracking-plan-escaly/diagrams/repo_flow.png)
+
+This diagram shows how **business logic** informs governance,  
+which shapes the tracking plan, which powers the case studies.
