@@ -55,27 +55,56 @@ Escaly follows the AARRR model. Each stage is defined conceptually:
 
 ## 5. Key Metrics
 
-### Activation Rate (First Session) (`activation_rate_session1`)
-- **Definition:** Percentage of new users who reach their first value moment during their first session.  
-- **Purpose:** Evaluates onboarding effectiveness.  
+## 5. Key Metrics
+
+### Metric Glossary
+
+| Metric ID                          | Display Name                        | Purpose                                               |
+|-----------------------------------|-------------------------------------|-------------------------------------------------------|
+| `signup_completion_rate`          | Signup Completion Rate              | Efficiency of Escaly’s signup flow                    |
+| `acq_to_activation_rate`          | Acquisition to Activation Rate      | Quality of new users (conversion into value)          |
+| `signup_channel_share`            | Channel Mix of New Accounts         | Distribution of signups by acquisition source         |
+| `activation_rate_session1`        | Activation Rate (First Session)     | Effectiveness of onboarding                          |
+| `tta_median_minutes`              | Time to Activation (Median)         | Speed of delivering first value                      |
+| `completion_rate_assessment`      | Assessment Completion Rate          | Usability of assessments (drop-off inside flow)       |
+| `assessments_per_active_account_m1` | Assessments per Active Account/Month | Depth of usage and account-level engagement          |
 
 ---
 
-### Time to Activation (Median) (`tta_median_minutes`)
-- **Definition:** Median elapsed time between signup and reaching the first value moment.  
-- **Purpose:** Shows how quickly users realize value.  
+### Acquisition Metrics
+- **Signup Completion Rate (`signup_completion_rate`)**  
+  Percentage of users who start the signup process and successfully create an account.  
+  *Purpose:* Measures the efficiency of Escaly’s onboarding funnel entry point.
+
+- **Acquisition to Activation Rate (`acq_to_activation_rate`)**  
+  Percentage of newly acquired users who reach their first value moment within Session 1.  
+  *Purpose:* Connects acquisition quality to early product value.
+
+- **Channel Mix of New Accounts (`signup_channel_share`)**  
+  Distribution of new accounts by acquisition source (e.g., organic, paid, referral).  
+  *Purpose:* Highlights which channels drive new users into Escaly.
 
 ---
 
-### Assessment Completion Rate (`completion_rate_assessment`)
-- **Definition:** Ratio of assessments successfully completed to assessments started within a given month.  
-- **Purpose:** Indicates product usability and drop-off within the assessment flow.  
+### Activation Metrics
+- **Activation Rate (First Session) (`activation_rate_session1`)**  
+  Percentage of new users who reach their first value moment during their first session.  
+  *Purpose:* Evaluates onboarding effectiveness.
+
+- **Time to Activation (Median) (`tta_median_minutes`)**  
+  Median elapsed time between signup and reaching the first value moment.  
+  *Purpose:* Shows how quickly new users realize value.
 
 ---
 
-### Assessments per Active Account per Month (`assessments_per_active_account_m1`)
-- **Definition:** Average number of completed assessments per active account in a month.  
-- **Purpose:** Normalizes usage to account size, ensuring growth is not concentrated in a few accounts.  
+### Product Usage Metrics
+- **Assessment Completion Rate (`completion_rate_assessment`)**  
+  Ratio of assessments successfully completed to assessments started within a given month.  
+  *Purpose:* Indicates product usability and where users drop off.
+
+- **Assessments per Active Account per Month (`assessments_per_active_account_m1`)**  
+  Average number of completed assessments per active account in a month.  
+  *Purpose:* Normalizes usage by account size and highlights depth of adoption.
 
 ---
 
