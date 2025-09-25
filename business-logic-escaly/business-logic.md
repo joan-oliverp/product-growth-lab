@@ -101,7 +101,15 @@ Escaly follows the AARRR model. Each stage is defined conceptually:
 
 ---
 
-## 9. Versioning & Change Log
+## 9. Relation to Governance
+This document defines *what matters* for Escaly’s growth (funnels, North Star, key metrics) at the **conceptual level**.  
+
+The corresponding **governance rules** (naming conventions, QA, privacy, versioning) are defined in  
+[`tracking-plan-escaly/governance.md`](../tracking-plan-escaly/governance.md) and ensure that any tracking plan implementing these metrics remains consistent and trustworthy.
+
+---
+
+## 10. Versioning & Change Log
 - **Versioning:** Semantic Versioning (semver) applies to business logic.  
   - Patch = clarity/typo updates.  
   - Minor = additive definitions.  
