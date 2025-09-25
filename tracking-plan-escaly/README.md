@@ -13,6 +13,15 @@ It ensures all user interactions are tracked consistently to support **activatio
 
 ---
 
+## Relation to Business Logic
+This tracking plan **implements** the metrics and funnels defined in the  
+[`business-logic-escaly/business-logic.md`](../business-logic-escaly/business-logic.md).
+
+- **Business logic = what matters** (North Star, AARRR funnel, key metrics)  
+- **Tracking plan = how we capture it** (event names, properties, governance)
+
+---
+
 ## 🔧 Core Events
 - **Signup** — NGO admin registers (role property = Admin/Technician).  
 - **CreateUser** — Admin adds the first internal user.  
