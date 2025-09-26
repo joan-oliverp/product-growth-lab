@@ -3,110 +3,134 @@
 A public portfolio of **technical product management artifacts** in **B2B SaaS, subscription models, and product-led growth (PLG)**.  
 This repo showcases not just strategy, but **hands-on ability** to design instrumentation, run growth experiments, and analyze SaaS economics.
 
+---
+
 ## 📌 Purpose
+This repository demonstrates my approach to building and scaling **B2B SaaS products with subscription models and PLG**.
 
-This repository showcases my hands-on approach to building and scaling **B2B SaaS products with subscription models and product-led growth (PLG)**.
+It highlights both **strategic thinking** (as a Head of Product) and **technical fluency**, including:
+* Defining **event instrumentation** and activation funnels  
+* Designing and analyzing **growth experiments**  
+* Building **SQL dashboards** for retention, activation, and billing  
+* Prototyping **AI-driven growth levers** (churn prediction, personalization)  
+* Simulating **SaaS billing and pricing models**
 
-It demonstrates not only strategic thinking as a Head of Product, but also the technical fluency needed to:
-* Define **event instrumentation** and activation funnels  
-* Design and analyze **growth experiments**  
-* Build **SQL dashboards** for retention, activation, and billing  
-* Prototype **AI-driven growth levers** (churn prediction, personalization)  
-* Simulate **SaaS billing and pricing models**
+All examples are based on my work with **Escaly** (a SaaS for social impact organizations) and broader SaaS learnings.  
+Where real data is not available, I use **mock datasets** to illustrate the approach.
 
-All examples are based on my current work with **Escaly** (a SaaS for social impact organizations) and other B2B SaaS learnings. Where real data is not available, I use **mock datasets** to illustrate the approach.
+---
 
 ## 📂 Repository Structure
-<span style="background-color: grey">**`/tracking-plan-escaly`**</span>
-* Event schema in JSON/CSV format
-* Documentation of key activation, retention, and monetization events
-* Example instrumentation diagrams
 
-👉 Shows ability to define measurable PLG funnels.
+<span style="background-color: grey">**`/business-logic-escaly`**</span>  
+* Defines funnels (AARRR), North Star, and key metrics at a **conceptual level**  
+* Independent from event names or schemas  
 
-<span style="background-color: grey">**`/dashboards`**</span>
-* SQL queries for activation, retention, and conversion funnels
-* Mock dashboards (Metabase / Looker Studio exports)
-* Cohort analysis examples
+👉 Frames *what matters* for Escaly’s growth.
+
+<span style="background-color: grey">**`/tracking-plan-escaly`**</span>  
+* Event schema in JSON + validation  
+* Governance rules for naming, ownership, and PII handling  
+* Flow diagrams of onboarding and reporting  
+
+👉 Shows *how business logic is implemented* in instrumentation.
+
+<span style="background-color: grey">**`/dashboards`**</span>  
+* SQL queries for activation, retention, and conversion funnels  
+* Mock dashboards (Metabase / Looker Studio exports)  
+* Cohort analysis examples  
 
 👉 Demonstrates data fluency and decision-support dashboards.
 
-<span style="background-color: grey">**`/growth-experiments`**</span>
-* Experiment design docs in Markdown (hypothesis → setup → evaluation)
-* Sample size calculations and statistical significance checks
-* Jupyter notebooks simulating A/B test results
+<span style="background-color: grey">**`/growth-experiments`**</span>  
+* Experiment design docs in Markdown (hypothesis → setup → evaluation)  
+* Sample size calculations and statistical significance checks  
+* Jupyter notebooks simulating A/B test results  
 
 👉 Evidence of structured experimentation mindset.
 
-<span style="background-color: grey">**`/billing-sandbox`**</span>
-* Test integration with Stripe API (usage-based billing simulation)
-* Example scripts and workflows
-* Documentation on pricing/packaging strategies
+<span style="background-color: grey">**`/billing-sandbox`**</span>  
+* Test integration with Stripe API (usage-based billing simulation)  
+* Example scripts and workflows  
+* Documentation on pricing/packaging strategies  
 
 👉 Shows competence in SaaS billing mechanics.
 
-<span style="background-color: grey">**`/ai-for-growth`**</span>
-* Prototype notebooks using OpenAI APIs for churn prediction and upsell triggers
-* Example scripts for personalized onboarding or messaging
-* Documentation of real-world applicability
+<span style="background-color: grey">**`/ai-for-growth`**</span>  
+* Prototype notebooks using OpenAI APIs for churn prediction and upsell triggers  
+* Scripts for personalized onboarding or messaging  
+* Documentation of real-world applicability  
 
 👉 Extends my track record of AI integration into PLG levers.
 
-<span style="background-color: grey">**`/case-studies`**</span>
-
+<span style="background-color: grey">**`/case-studies`**</span>  
 Readable write-ups that combine Escaly and SaaS learnings:
-* **[Escaly Activation Funnel](./case-studies/escaly-activation-funnel/README.md)**
-  * Defined activation as *first report generated within 7 days of signup*.
-  * Designed onboarding experiment (baseline vs. AI-guided flow).
-  * Built SQL notebook + dashboard to measure funnel conversion.
-  * Outcome: +20pp increase in activation (mock data).
+* **[Escaly Activation Funnel](./case-studies/escaly-activation-funnel/README.md)**  
+  * Defined activation as *first report generated within Session 1*.  
+  * Designed onboarding experiment (baseline vs. AI-guided flow).  
+  * Built SQL notebook + funnel dashboard.  
+  * Outcome: +20pp activation lift (mock data).  
 
-👉 Storytelling layer that connects technical work to product strategy.
+👉 Storytelling layer connecting technical work to product strategy.
+
+---
+
+🔗 See [business-logic-escaly](business-logic-escaly) for conceptual definitions (funnels, North Star, key metrics) and [tracking-plan-escaly](tracking-plan-escaly) for their instrumentation and governance.  
+
+---
 
 ## 🛣️ Roadmap & Status
+This roadmap shows what’s complete (✅) and what’s in progress (⏳).  
+Each artifact is delivered through commits and PRs, with reproducible instructions.
 
-To provide transparency on what’s already implemented and what’s planned, here’s a high‑level roadmap. Items marked ✅ are complete; items marked ⏳ are in progress or queued for future sprints.
+### Business Logic
+* ✅ **business-logic-escaly** – defined funnels (AARRR), North Star metric, and key metrics in `business-logic.md`.
 
-### Case Studies
-* ✅ **Escaly Activation Funnel** – defined activation metric, designed onboarding experiment, and documented the results with insights.
-* ⏳ **Paywall Conversion** – upcoming study on trial-to-paid conversion; will include SQL analysis and experiment design.
-* ⏳ **Retention Cohorts** – planned analysis of retention curves and cohort behaviour.
+### Governance
+* ✅ **governance.md** – established naming conventions, ownership, PII rules, and QA guidelines.
 
 ### Tracking Plan
-* ⏳ **tracking-plan-escaly/events.json** – define core events and properties for Escaly, including naming conventions and governance notes.
-* ⏳ **Instrumentation diagrams** – visual diagrams showing event flow across the activation funnel.
+* ⏳ **events.json** – initial draft completed with identifiers, events, and properties; under review before finalization.  
+* ⏳ **events.schema.json** – lightweight schema created for validation in VS Code.  
+* ⏳ **Instrumentation diagrams** – flow diagrams of acquisition → activation events planned.
+
+### Case Studies
+* ⏳ **Escaly Activation Funnel** – structure defined; narrative draft in progress, awaiting SQL notebook + funnel chart.  
+* ⏳ **Paywall Conversion** – upcoming study on trial-to-paid conversion.  
+* ⏳ **Retention Cohorts** – planned analysis of retention curves and cohort behavior.
 
 ### Dashboards & SQL
-
-* ⏳ **activation_funnel.sql** – write SQL to compute activation rate within 7 days.
-* ⏳ **retention_cohorts.sql** – build cohort analysis queries and corresponding charts.
-* ⏳ **paywall_conversion.sql** – explore trial-to-paid conversion metrics.
+* ⏳ **activation_funnel.sql** – blueprint defined; notebook and charts pending.  
+* ⏳ **retention_cohorts.sql** – planned cohort analysis queries and charts.  
+* ⏳ **paywall_conversion.sql** – planned trial-to-paid conversion analysis.
 
 ### Growth Experiments
-
-* ⏳ **AB test templates** – create Markdown templates and notebooks for experiment design and sample size calculation.
-* ⏳ **Additional experiments** – document future experiments such as pricing page tests or onboarding variants.
+* ⏳ **A/B test templates** – design templates planned.  
+* ⏳ **Future experiments** – upcoming (pricing page tests, onboarding variants).
 
 ### Billing Sandbox
-
-* ⏳ **Stripe usage simulation** – build a Python script to simulate usage-based billing events.
-* ⏳ **Pricing scenarios** – outline alternative pricing/packaging strategies and their impact on revenue.
+* ⏳ **Stripe usage simulation** – planned for usage-based billing events.  
+* ⏳ **Pricing scenarios** – planned simulations of packaging/revenue impact.
 
 ### AI for Growth
+* ⏳ **Churn prediction prototype** – planned modeling of churn risk with mock data.  
+* ⏳ **Personalized onboarding** – planned AI-driven onboarding experiments.
 
-* ⏳ **Churn prediction prototype** – develop an initial notebook to model churn risk using mock engagement data.
-* ⏳ **Personalized onboarding** – experiment with AI-driven onboarding sequences tailored to user personas.
+---
 
-You can follow these roadmap items through the repository’s commits and PRs. Each new artifact will update this checklist and include clear instructions so you can reproduce the results yourself.
+## 🧩 From Strategy to Execution
+This portfolio connects **strategic product thinking** with **hands-on execution**.
 
-## 🧩 Why This Portfolio Matters
+- **Strategy:** Business logic defined first (AARRR funnel, North Star metric) to guide measurement.  
+- **Execution:** Tracking plan implemented in JSON + schema, with governance and QA rules.  
+- **Insight:** SQL notebooks and case studies that turn events into activation, retention, and monetization insights.  
+- **Breadth:** Artifacts cover the full PLG journey — from acquisition funnels to billing, experimentation, and AI-driven growth levers.  
 
-Hiring for senior product roles often demands evidence of **both leadership and hands-on capability**.
-This repo is my way of bridging that gap:
-* **Leadership**: I’ve scaled multiple B2B SaaS products from concept to market leadership.
-* **Technical**: I can directly design tracking, run SQL, set up billing, and orchestrate AI-driven growth experiments.
+Together, these artifacts show how product metrics can be defined, instrumented, and analyzed to drive SaaS growth.
+
+---
 
 ## 🔗 Connect with Me
-* [LinkedIn](https://www.linkedin.com/in/joanoliverpoyatos/)
-* [Portfolio of Products](https://qstcoop.org/)
-* [Email](mailto:joan.poyatos@gmail.com)
+* [LinkedIn](https://www.linkedin.com/in/joanoliverpoyatos/)  
+* [Portfolio of Products](https://qstcoop.org/)  
+* [Email](mailto:joan.poyatos@gmail.com)  

@@ -1,21 +1,22 @@
-# Escaly — Business Logic
+# Business Logic — Escaly
 
-This folder defines **Escaly’s product business logic**: the North Star, AARRR funnel, and key metrics.  
+## 🎯 Purpose
+This folder defines the **business logic layer** of Escaly’s analytics.  
+It describes *what matters* for growth — funnels, the North Star metric, and key product metrics — without referencing technical event names or schemas.
 
-It is intentionally **decoupled from the tracking plan**:
+By separating business logic from instrumentation, Escaly ensures that product decisions drive measurement, not the other way around.
 
-- **Business logic = what matters**  
-  Defines the core product metrics and rules (activation, retention, NSM).  
-- **Tracking plan = how we capture it**  
-  Maps those definitions to concrete events, properties, and governance.
+---
 
-This ensures that **product decisions drive instrumentation**, not the other way around.
+## 📂 Contents
+- **business-logic.md** → Canonical definitions of funnels (AARRR), the North Star, and key metrics.
 
-## Contents
-- `business-logic.md` — canonical definitions of funnels, North Star metric, and key metrics.
+---
 
-## Repo Flow
-![Escaly Repo Flow](../tracking-plan-escaly/diagrams/repo_flow.png)
+## Relation to Tracking Plan
+The **business logic** defines Escaly’s growth framework at a conceptual level.  
+The **tracking plan** ([../tracking-plan-escaly](../tracking-plan-escaly)) implements this logic in events, properties, and governance rules.
 
-This diagram shows how **business logic** informs governance,  
-which shapes the tracking plan, which powers the case studies.
+Together, they form the foundation for case studies and dashboards.
+
+---

@@ -2,14 +2,21 @@
 
 ## 🎯 Purpose
 This folder defines the **event instrumentation schema** for Escaly.  
-It ensures all user interactions are tracked consistently to support **activation, retention, and monetization analysis**.
+It ensures product interactions are tracked consistently to support **acquisition, activation, retention, and monetization analysis**.
+
+The plan is implemented in code (JSON + schema) to provide version control, validation, and transparency — mirroring how modern SaaS teams manage analytics contracts.
 
 ---
 
 ## 📂 Contents
-- **events.json** → Canonical event schema (Signup → Report → UpgradePlan).  
-- **governance.md** → Rules for naming, PII handling, and event ownership.  
-- **diagrams/** → Visual sequence diagrams of onboarding and reporting flows.
+- **events.json** → Canonical event definitions (signup, assessment, report generation).  
+- **governance.md** → Rules for naming, ownership, data quality, and PII handling.  
+- **about-tracking-plan.md** → Rationale and overview of why this plan was designed this way.  
+- **diagrams/** → Visual flow diagrams of onboarding and reporting funnels.  
+
+---
+
+👉 See [about-tracking-plan.md](about-tracking-plan.md) for the rationale behind this plan and how it was designed.
 
 ---
 
