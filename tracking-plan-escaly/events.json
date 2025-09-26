@@ -55,11 +55,6 @@
         "channel":       { "use": "cross_event_properties" },
         "device_type":   { "use": "cross_event_properties" },
         "locale":        { "use": "cross_event_properties" }
-      },
-      "quality": {
-        "idempotency_key": ["anonymous_id","event","occurred_at"],
-        "required_non_null": ["anonymous_id","signup_step","source_surface"],
-        "notes": "Client event; tolerate occasional duplicates—warehouse dedupe will apply."
       }
     },
 
@@ -79,11 +74,6 @@
         "utm_campaign":   { "use": "cross_event_properties" },
         "channel":        { "use": "cross_event_properties" },
         "plan_tier":      { "use": "cross_event_properties" }
-      },
-      "quality": {
-        "idempotency_key": ["user_id","event"],
-        "required_non_null": ["user_id","account_id","method","is_email_verified"],
-        "notes": "Server authoritative; one emission per new account."
       }
     },
 
@@ -98,11 +88,6 @@
       "properties": {
         "scale_name":   { "type": "string", "required": true, "pii": false, "description": "Human-readable name of the selected scale (non-authoritative)." },
         "category":     { "type": "enum", "enum": ["compliance","security","fundraising","other"], "required": false, "pii": false, "description": "Optional high-level taxonomy; include only if well-defined." }
-      },
-      "quality": {
-        "idempotency_key": ["user_id","scale_id","event","occurred_at"],
-        "required_non_null": ["user_id","account_id","scale_id","scale_name"],
-        "notes": "Client event; used for funnel pathing and mix analysis."
       }
     },
 
@@ -121,12 +106,6 @@
         "duration_seconds": { "type": "integer", "required": false, "pii": false, "description": "Server-derived: time from first start to completion (non-decreasing across updates)." },
         "scale_name":       { "type": "string", "required": false, "pii": false, "description": "Human-readable scale name (non-authoritative)."
         }
-      },
-      "quality": {
-        "idempotency_key": ["assessment_id","status"],
-        "dedupe_rule": "Keep latest record per assessment_id and status; for NSM counting, count unique assessment_id with final status=complete.",
-        "required_non_null": ["user_id","account_id","assessment_id","scale_id","status"],
-        "notes": "Server authoritative to prevent client spoofing of completion."
       }
     },
 
@@ -143,11 +122,6 @@
         "generation_ms":  { "type": "integer", "required": false, "pii": false, "description": "Server time spent generating the report (milliseconds)." },
         "scale_name":     { "type": "string", "required": false, "pii": false, "description": "Human-readable scale name (non-authoritative)."
         }
-      },
-      "quality": {
-        "idempotency_key": ["report_id"],
-        "required_non_null": ["user_id","account_id","report_id","assessment_id","scale_id","format"],
-        "notes": "Server authoritative; used for activation rate and time-to-activation."
       }
     }
   ],

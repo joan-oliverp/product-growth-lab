@@ -54,6 +54,16 @@ These rules apply to all current and future events, properties, and identifiers.
 - **Null handling:** required properties must never be null  
 - **Monitoring:** sample events checked in dev and production  
 
+### Event QA Rules
+To ensure data quality, each event must pass the following validation checks in the warehouse:
+| Event             | Idempotency Key                  | Required Non-Null Fields                     | Notes                                   |
+|-------------------|----------------------------------|----------------------------------------------|-----------------------------------------|
+| signup_started    | anonymous_id, event, occurred_at | anonymous_id, signup_step, source_surface     | Client event; allow retries, dedupe in warehouse |
+| signup_completed  | user_id, event                   | user_id, account_id, method, is_email_verified | Server authoritative; one per account   |
+| select_scale      | user_id, scale_id, event, occurred_at | user_id, account_id, scale_id, scale_name | Client event; used for funnel analysis  |
+| submit_assessment | assessment_id, status            | user_id, account_id, assessment_id, scale_id, status | Keep latest record per assessment_id; server authoritative |
+| generate_report   | report_id                        | user_id, account_id, report_id, assessment_id, scale_id, format | Server authoritative; dedupe by report_id |
+
 ---
 
 ## 5. Versioning
