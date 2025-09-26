@@ -1,0 +1,55 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Escaly Tracking Plan Schema",
+  "type": "object",
+  "required": ["name", "version", "events"],
+  "properties": {
+    "name": { "type": "string" },
+    "version": { "type": "string" },
+    "generated_at": { "type": "string", "format": "date-time" },
+    "description": { "type": "string" },
+    "events": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["event", "version", "owner", "authority", "description", "properties"],
+        "properties": {
+          "event": {
+            "type": "string",
+            "pattern": "^[a-z0-9]+(_[a-z0-9]+)*$",
+            "description": "Event name in snake_case"
+          },
+          "version": { "type": "string" },
+          "owner": { "type": "string" },
+          "authority": { "type": "string", "enum": ["client", "server"] },
+          "description": { "type": "string" },
+          "triggers": { "type": "string" },
+          "required_identifiers": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "properties": {
+            "type": "object",
+            "patternProperties": {
+              "^[a-z0-9]+(_[a-z0-9]+)*$": {
+                "type": "object",
+                "required": ["type", "description"],
+                "properties": {
+                  "type": { "type": "string" },
+                  "required": { "type": "boolean" },
+                  "pii": { "type": "boolean" },
+                  "description": { "type": "string" },
+                  "enum": {
+                    "type": "array",
+                    "items": { "type": "string" }
+                  }
+                }
+              }
+            },
+            "additionalProperties": false
+          }
+        }
+      }
+    }
+  }
+}
