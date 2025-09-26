@@ -55,8 +55,6 @@ Escaly follows the AARRR model. Each stage is defined conceptually:
 
 ## 5. Key Metrics
 
-## 5. Key Metrics
-
 ### Metric Glossary
 
 | Metric ID                          | Display Name                        | Purpose                                               |
