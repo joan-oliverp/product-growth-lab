@@ -1,0 +1,15 @@
+flowchart LR
+  A["**signup_started**
+  (intent to create account)"] --> B["**signup_completed**
+  (account created & verified)"]
+  B --> C["**select_scale**
+  user chooses framework"]
+  C --> D["**submit_assessment**
+  (status: started → in_progress → complete)"]
+  D --> E["**generate_report**
+  (first value moment)"]
+  
+  classDef acq fill:#F0F9FF,stroke:#0369A1,color:#0369A1;
+  classDef act fill:#F0FDF4,stroke:#15803D,color:#15803D;
+  class A,B acq;
+  class C,D,E act;

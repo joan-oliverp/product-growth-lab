@@ -16,7 +16,12 @@ The plan is implemented in code (JSON + schema) to provide version control, vali
 
 ---
 
-👉 See [about-tracking-plan.md](about-tracking-plan.md) for the rationale behind this plan and how it was designed.
+## 📊 Acquisition → Activation Flow
+![Acquisition to Activation Flow](diagrams/acq_to_activation_flow.png)
+
+This flow diagram illustrates the **Acquisition → Activation funnel** for Escaly.  
+It shows the key product events in order — from signup to first report — and highlights where users may drop off.  
+While `events.json` defines the schema in detail, the diagram provides a quick visual overview of the funnel being instrumented and analyzed in case studies.
 
 ---
 

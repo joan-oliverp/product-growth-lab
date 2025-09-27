@@ -1,0 +1,27 @@
+sequenceDiagram
+  autonumber
+  participant User
+  participant ClientApp as Client App
+  participant Server
+
+  User->>ClientApp: signup_started (intent to create account)
+
+  ClientApp->>Server: signup_started (client)
+  Server-->>ClientApp: ack
+
+  User->>ClientApp: signup_completed (account created & verified)
+  ClientApp->>Server: request create account
+  Server-->>ClientApp: ok
+  Server->>Server: signup_completed (server authoritative)
+
+  User->>ClientApp: select_scale (user chooses framework)
+  ClientApp->>Server: select_scale (client)
+
+  User->>ClientApp: Fill assessment
+  loop Assessment lifecycle
+    ClientApp->>Server: submit_assessment (started → in_progress → complete)
+    Server-->>ClientApp: ack
+  end
+
+  Server->>Server: generate_report (first value moment)
+  Server-->>ClientApp: Report available (web/pdf)

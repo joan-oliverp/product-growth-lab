@@ -8,6 +8,36 @@
     "version": { "type": "string" },
     "generated_at": { "type": "string", "format": "date-time" },
     "description": { "type": "string" },
+
+    "identifiers": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "required": ["type", "description"],
+        "properties": {
+          "type": { "type": "string" },
+          "required": { "type": "boolean" },
+          "description": { "type": "string" }
+        },
+        "additionalProperties": false
+      }
+    },
+
+    "cross_event_properties": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "required": ["type", "description"],
+        "properties": {
+          "type": { "type": "string" },
+          "pii": { "type": "boolean" },
+          "description": { "type": "string" },
+          "enum": { "type": "array", "items": { "type": "string" } }
+        },
+        "additionalProperties": false
+      }
+    },
+
     "events": {
       "type": "array",
       "items": {
@@ -32,24 +62,43 @@
             "type": "object",
             "patternProperties": {
               "^[a-z0-9]+(_[a-z0-9]+)*$": {
-                "type": "object",
-                "required": ["type", "description"],
-                "properties": {
-                  "type": { "type": "string" },
-                  "required": { "type": "boolean" },
-                  "pii": { "type": "boolean" },
-                  "description": { "type": "string" },
-                  "enum": {
-                    "type": "array",
-                    "items": { "type": "string" }
+                "oneOf": [
+                  {
+                    "type": "object",
+                    "required": ["type", "description"],
+                    "properties": {
+                      "type": { "type": "string" },
+                      "required": { "type": "boolean" },
+                      "pii": { "type": "boolean" },
+                      "description": { "type": "string" },
+                      "enum": {
+                        "type": "array",
+                        "items": { "type": "string" }
+                      }
+                    },
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "object",
+                    "required": ["use"],
+                    "properties": {
+                      "use": {
+                        "type": "string",
+                        "enum": ["cross_event_properties"],
+                        "description": "Reference to a property defined in top-level cross_event_properties"
+                      }
+                    },
+                    "additionalProperties": false
                   }
-                }
+                ]
               }
             },
             "additionalProperties": false
           }
-        }
+        },
+        "additionalProperties": false
       }
     }
-  }
+  },
+  "additionalProperties": true
 }
