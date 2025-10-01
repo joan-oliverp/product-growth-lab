@@ -9,7 +9,7 @@ from datetime import datetime, timedelta, timezone
 CHANNEL_DIST = {
     "organic": 0.4, "paid_search": 0.25, "referral": 0.1, "email": 0.15, "direct": 0.1
 }
-PLA_DIST = {"free": 0.65, "pro":0.25, "business": 0.05}
+PLAN_DIST = {"free": 0.65, "pro":0.25, "business": 0.05}
 DEVICE_DIST = {"desktop": 0.7, "mobile": 0.25, "tablet": 0.05}
 LOCALES = ["en-US", "es-ES", "ca-ES", "fr-FR"]
 SCALES = [("sc_101", "GENCAT"), ("sc_102", "Barthel"), ("sc_103", "GHQ-12"), ("sc_104", "Geriatric Depression Scale (GDS)"), ("sc_105", "Mini-Mental State Examination (MMSE)")]
@@ -63,7 +63,7 @@ def generate_users(n_users, start_date, end_date):
         plan = choice_from_dist(PLAN_DIST)
         device = choice_from_dist(DEVICE_DIST)
         locale = random.choice(LOCALES)
-        method = choice_from_dist(METHOD_DIST)
+        method = choice_from_dist(SIGNUP_AUTH_DIST)
         email_verified = True if method != "email_password" else (random.random() < 0.95)
 
         yield {
