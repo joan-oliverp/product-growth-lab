@@ -1,0 +1,159 @@
+{
+  "$schema": "./events.schema.json",
+  "name": "Escaly Tracking Plan",
+  "version": "1.0.0",
+  "generated_at": "2025-09-25T00:00:00Z",
+  "description": "Canonical event and property definitions for Escaly. Implements Acquisition & Activation funnels, North Star (Monthly Assessments), and Key Metrics per business logic. Follows governance: snake_case, server-authoritative value events, no PII in properties.",
+
+  "conventions": {
+    "event_case": "snake_case",
+    "property_case": "snake_case",
+    "verb_tense": "present",
+    "boolean_prefix": ["is_", "has_"],
+    "timestamp_suffix": ["_at", "_timestamp"],
+    "pii_policy": "No PII in event properties; identity is handled separately."
+  },
+
+  "identifiers": {
+    "anonymous_id": { "type": "string", "required": false, "description": "Pre-auth session identifier." },
+    "user_id":       { "type": "string", "required": false, "description": "Stable user identifier (post-auth)." },
+    "account_id":    { "type": "string", "required": false, "description": "Stable B2B account identifier (post-signup)." },
+    "session_id":    { "type": "string", "required": false, "description": "Optional client/session helper; sessionization can be computed in warehouse." },
+    "scale_id":      { "type": "string", "required": false, "description": "Framework/template identifier." },
+    "assessment_id": { "type": "string", "required": false, "description": "Unique per assessment instance." },
+    "report_id":     { "type": "string", "required": false, "description": "Unique per generated report." }
+  },
+
+  "cross_event_properties": {
+    "utm_source":    { "type": "string", "pii": false, "description": "UTM source" },
+    "utm_medium":    { "type": "string", "pii": false, "description": "UTM medium" },
+    "utm_campaign":  { "type": "string", "pii": false, "description": "UTM campaign" },
+    "channel":       { "type": "enum", "enum": ["organic","paid_search","paid_social","referral","direct","email","other"], "pii": false, "description": "Normalized acquisition channel." },
+    "plan_tier":     { "type": "enum", "enum": ["free","pro","business"], "pii": false, "description": "Selected plan tier if applicable." },
+    "industry":      { "type": "string", "pii": false, "description": "Customer industry (controlled list preferred)." },
+    "region":        { "type": "string", "pii": false, "description": "Geographic region (ISO code preferred)." },
+    "device_type":   { "type": "enum", "enum": ["desktop","mobile","tablet"], "pii": false, "description": "Device category." },
+    "locale":        { "type": "string", "pii": false, "description": "Interface locale (BCP-47, e.g. en-US)." },
+    "exp_onboarding_flow": { "type": "string", "pii": false, "description": "Experiment assignment for onboarding flow (e.g., control, variant_a)." }
+  },
+
+  "events": [
+    {
+      "event": "signup_started",
+      "version": "1.0.0",
+      "owner": "PM (Escaly)",
+      "authority": "client",
+      "description": "User indicates intent to create an account (first actionable step of signup).",
+      "triggers": "Fires when the user submits the first signup step.",
+      "required_identifiers": ["anonymous_id"],
+      "properties": {
+        "signup_step":   { "type": "integer", "required": true,  "pii": false, "description": "Current step index, starting at 1." },
+        "source_surface":{ "type": "enum",    "enum": ["marketing_site","landing_page","in_app"], "required": true, "pii": false, "description": "Where signup was initiated." },
+        "utm_source":    { "use": "cross_event_properties" },
+        "utm_medium":    { "use": "cross_event_properties" },
+        "utm_campaign":  { "use": "cross_event_properties" },
+        "channel":       { "use": "cross_event_properties" },
+        "device_type":   { "use": "cross_event_properties" },
+        "locale":        { "use": "cross_event_properties" }
+      }
+    },
+
+    {
+      "event": "signup_completed",
+      "version": "1.0.0",
+      "owner": "PM (Escaly)",
+      "authority": "server",
+      "description": "Account successfully created and verified.",
+      "triggers": "Fires upon successful account creation and verification (email token or SSO).",
+      "required_identifiers": ["user_id","account_id"],
+      "properties": {
+        "method":         { "type": "enum", "enum": ["email_password","sso_google","sso_azure"], "required": true, "pii": false, "description": "Signup authentication method." },
+        "is_email_verified": { "type": "boolean", "required": true, "pii": false, "description": "Email verification status at creation." },
+        "utm_source":     { "use": "cross_event_properties" },
+        "utm_medium":     { "use": "cross_event_properties" },
+        "utm_campaign":   { "use": "cross_event_properties" },
+        "channel":        { "use": "cross_event_properties" },
+        "plan_tier":      { "use": "cross_event_properties" }
+      }
+    },
+
+    {
+      "event": "select_scale",
+      "version": "1.0.0",
+      "owner": "PM (Escaly)",
+      "authority": "client",
+      "description": "User selects a framework/scale to assess.",
+      "triggers": "Fires when a user confirms selection of a scale/template.",
+      "required_identifiers": ["user_id","account_id","scale_id"],
+      "properties": {
+        "scale_name":   { "type": "string", "required": true, "pii": false, "description": "Human-readable name of the selected scale (non-authoritative)." },
+        "category":     { "type": "enum", "enum": ["compliance","security","fundraising","other"], "required": false, "pii": false, "description": "Optional high-level taxonomy; include only if well-defined." }
+      }
+    },
+
+    {
+      "event": "submit_assessment",
+      "version": "1.0.0",
+      "owner": "PM (Escaly)",
+      "authority": "server",
+      "description": "Assessment submission signal for start/progress/complete. Used for NSM and completion rate.",
+      "triggers": "Emitted on assessment state changes (start, progress, completion).",
+      "required_identifiers": ["user_id","account_id","assessment_id","scale_id"],
+      "properties": {
+        "status":           { "type": "enum", "enum": ["started","in_progress","complete"], "required": true, "pii": false, "description": "Assessment lifecycle state." },
+        "question_count":   { "type": "integer", "required": false, "pii": false, "description": "Total questions available in the assessment." },
+        "answered_count":   { "type": "integer", "required": false, "pii": false, "description": "Questions answered at time of submission." },
+        "duration_seconds": { "type": "integer", "required": false, "pii": false, "description": "Server-derived: time from first start to completion (non-decreasing across updates)." },
+        "scale_name":       { "type": "string", "required": false, "pii": false, "description": "Human-readable scale name (non-authoritative)."
+        }
+      }
+    },
+
+    {
+      "event": "generate_report",
+      "version": "1.0.0",
+      "owner": "PM (Escaly)",
+      "authority": "server",
+      "description": "Report generated and delivered to the user (activation moment).",
+      "triggers": "Fires when report rendering completes successfully and is available to the user.",
+      "required_identifiers": ["user_id","account_id","report_id","assessment_id","scale_id"],
+      "properties": {
+        "format":         { "type": "enum", "enum": ["web","pdf"], "required": true, "pii": false, "description": "Primary delivery format." },
+        "generation_ms":  { "type": "integer", "required": false, "pii": false, "description": "Server time spent generating the report (milliseconds)." },
+        "scale_name":     { "type": "string", "required": false, "pii": false, "description": "Human-readable scale name (non-authoritative)."
+        }
+      }
+    }
+  ],
+
+  "metric_support": {
+    "signup_completion_rate": {
+      "definition": "Users who completed signup divided by users who started signup (within same-day window for simplicity).",
+      "signals": ["signup_started","signup_completed"]
+    },
+    "acq_to_activation_rate": {
+      "definition": "Share of newly signed-up users who reach first value moment in Session 1.",
+      "signals": ["signup_completed","generate_report"]
+    },
+    "activation_rate_session1": {
+      "definition": "Percentage of new users who reach first value moment during first session.",
+      "signals": ["signup_completed","generate_report"]
+    },
+    "tta_median_minutes": {
+      "definition": "Median minutes from signup completion to first value moment.",
+      "signals": ["signup_completed","generate_report"]
+    },
+    "completion_rate_assessment": {
+      "definition": "Completed assessments divided by started assessments in a month.",
+      "signals": ["submit_assessment"]
+    },
+    "assessments_per_active_account_m1": {
+      "definition": "Monthly completed assessments divided by number of active accounts that month.",
+      "signals": ["submit_assessment","generate_report"]
+    },
+    "signup_channel_share": {
+      "definition": "Distribution of signups by acquisition channel.",
+      "signals": ["signup_completed"]
+    }
+  }
+}
