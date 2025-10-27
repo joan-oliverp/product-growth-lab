@@ -35,6 +35,13 @@ Where real data is not available, I use **mock datasets** to illustrate the appr
 
 👉 Shows *how business logic is implemented* in instrumentation.
 
+<span style="background-color: grey">**`/case-studies`**</span>  
+Readable write-ups that combine Escaly and SaaS learnings:
+* **[Activation Funnel](./case-studies/escaly-activation-funnel/README.md)**: Defining and measuring user activation in Escaly.
+* **[Retention Cohorts](./case-studies/escaly-retention-cohorts/README.md)**: Measuring team adoption and 12-week retention.
+
+👉 Storytelling layer connecting technical work to product strategy.
+
 <span style="background-color: grey">**`/dashboards`**</span>  
 * SQL queries for activation, retention, and conversion funnels  
 * Mock dashboards (Metabase / Looker Studio exports)  
@@ -63,16 +70,6 @@ Where real data is not available, I use **mock datasets** to illustrate the appr
 
 👉 Extends my track record of AI integration into PLG levers.
 
-<span style="background-color: grey">**`/case-studies`**</span>  
-Readable write-ups that combine Escaly and SaaS learnings:
-* **[Escaly Activation Funnel](./case-studies/escaly-activation-funnel/README.md)**  
-  * Defined activation as *first report generated within Session 1*.  
-  * Designed onboarding experiment (baseline vs. AI-guided flow).  
-  * Built SQL notebook + funnel dashboard.  
-  * Outcome: +20pp activation lift (mock data).  
-
-👉 Storytelling layer connecting technical work to product strategy.
-
 ---
 
 🔗 See [business-logic-escaly](business-logic-escaly) for conceptual definitions (funnels, North Star, key metrics) and [tracking-plan-escaly](tracking-plan-escaly) for their instrumentation and governance.  
@@ -90,19 +87,14 @@ Each artifact is delivered through commits and PRs, with reproducible instructio
 * ✅ **governance.md** – established naming conventions, ownership, PII rules, and QA guidelines.
 
 ### Tracking Plan
-* ⏳ **events.json** – initial draft completed with identifiers, events, and properties; under review before finalization.  
-* ⏳ **events.schema.json** – lightweight schema created for validation in VS Code.  
+* ✅ **events.json** – initial draft completed with identifiers, events, and properties; under review before finalization.  
+* ✅ **events.schema.json** – lightweight schema created for validation in VS Code.  
 * ⏳ **Instrumentation diagrams** – flow diagrams of acquisition → activation events planned.
 
 ### Case Studies
-* ⏳ **Escaly Activation Funnel** – structure defined; narrative draft in progress, awaiting SQL notebook + funnel chart.  
+* ✅ **Escaly Activation Funnel** – structure defined; narrative draft in progress, awaiting SQL notebook + funnel chart.  
+* ✅ **Retention Cohorts** – planned analysis of retention curves and cohort behavior.
 * ⏳ **Paywall Conversion** – upcoming study on trial-to-paid conversion.  
-* ⏳ **Retention Cohorts** – planned analysis of retention curves and cohort behavior.
-
-### Dashboards & SQL
-* ⏳ **activation_funnel.sql** – blueprint defined; notebook and charts pending.  
-* ⏳ **retention_cohorts.sql** – planned cohort analysis queries and charts.  
-* ⏳ **paywall_conversion.sql** – planned trial-to-paid conversion analysis.
 
 ### Growth Experiments
 * ⏳ **A/B test templates** – design templates planned.  

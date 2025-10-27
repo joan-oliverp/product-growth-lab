@@ -1,9 +1,9 @@
 # Case Study — Escaly Retention Cohorts
 
 ## 🎯 Context
-This case study is part of the *Product Manager Technical Skills & PLG Portfolio*.  
+This case study is part of the *Product Manager Technical Skills & PLG Portfolio*.
 
-The goal is to analyze **retention behavior in Escaly**, a B2B SaaS platform that digitalizes psychosocial assessments for social organizations.  
+The goal is to analyze **retention behavior in Escaly**, a B2B SaaS platform that digitalizes psychosocial assessments for social organizations.
 
 The study explores how *team adoption*—the number of professionals actively using Escaly within the same organization—affects 12-week retention.
 
@@ -47,7 +47,7 @@ While Escaly plans to track invitation and sharing events (`user_invited`, `repo
 
 ---
 
-## **Technical Specification**
+## Technical Specification
 The detailed tracking plan for this analysis is documented separately in:  
 [`tracking-plan-extension.md`](./tracking-plan-extension.md)
 
@@ -57,17 +57,29 @@ This supporting file outlines the event schema, governance alignment, and measur
 
 ## 📈 Results (Mock or Real Data)
 
-A 12-week retention analysis was run on 86 organizations that signed up between May and July 2025.
+### 12-Week Retention by Team Segment
+
+**Retention Curve (mock data)**  
+![Escaly — 12-Week Retention by Team Segment](./figs/retention_curve.png)
+
+The figure above shows the 12-week retention trajectories for single-user vs. multi-user organizations. Multi-user accounts maintain engagement far longer, while single-user organizations rapidly decay within the first month.
+
+---
+
+### Weighted Retention by Cohort Size
 
 | Cohort Type | Week 1 | Week 4 | Week 8 | Week 12 |
 |--------------|--------|--------|--------|---------|
-| Single-user orgs (n = 49) | 68 % | 34 % | 19 % | 10 % |
-| Multi-user orgs (n = 37) | 92 % | 73 % | 52 % | 31 % |
+| Single-user orgs (n = 47) | 57.4 % | 6.4 % | 21.3 % | 6.4 % |
+| Multi-user orgs (n = 33) | 90.9 % | 81.8 % | 57.6 % | 42.4 % |
 
-- Multi-user organizations retained activity **3.1× longer on average**.  
-- The retention curve for team-adopted accounts flattened after week 6, while single-user accounts decayed steadily.  
-- Entities using **multiple scales** (e.g., GENCAT + Barthel) added +6 pp to week 12 retention.  
-- 81 % of churned accounts never had a second active user.
+### Interpretation
+
+- **Early Engagement Gap (Week 1).** Multi-user organizations retain nearly twice as many active accounts in the first week (90.9 %) compared with single-user accounts (57.4 %). Collaboration clearly accelerates early value realization.
+- **Critical Divergence (Week 4).** By week 4, single-user organizations collapse to 6.4 % retention while multi-user orgs still hold 81.8 %. → This marks the activation-retention inflection point: if teamwork hasn’t formed within the first month, churn risk becomes extreme.
+- **Mid-Term Stability (Weeks 6–8).** Multi-user orgs level off around 60 %, a healthy plateau typical of engaged SaaS teams.
+Single-user orgs show minor bumps (≈ 20 %) from sporadic re-use but lack sustained patterns.
+- **Long-Term Retention (Week 12).** After three months, 42 % of multi-user organizations remain active versus only 6 % of single-user ones — a 7× retention advantage driven by team adoption.
 
 ---
 
@@ -78,10 +90,7 @@ A 12-week retention analysis was run on 86 organizations that signed up between 
 2. **Peer influence accelerates digital adoption.**  
    Internal champions succeed when they onboard at least one colleague early—social proof lowers resistance to change.  
 
-3. **Depth and breadth reinforce each other.**  
-   Collaborative teams using multiple scales retain longest, showing the compound effect of social and functional engagement.  
-
-4. **Product implication.**  
+3. **Product implication.**  
    Onboarding should explicitly nudge first users to *invite a teammate* and *complete an assessment together*.  
    Collaboration is not a side feature; it’s the retention engine.
 
@@ -103,27 +112,24 @@ A 12-week retention analysis was run on 86 organizations that signed up between 
   Team retention validates a shift from single-seat trials to tiered, organization-based subscriptions—the foundation for scalable ARR.  
 
 - **Efficient growth.**  
-  A +10 pp increase in team activation can translate into +6–8 pp improvement in week-12 retention, boosting LTV without new acquisition spend.  
+  A +32 pp increase in team activation can translate into +36 pp improvement in week-12 retention, boosting LTV without new acquisition spend.
 
 ---
 
 ## 📂 Supporting Artifacts
-- **Tracking Plan:** [Link to events.json or schema]  
-- **SQL Notebook:** [Link to notebook or queries]  
-- **Mock Data:** [Link to CSV/DB if available]  
-- **Figures:** ![Example Chart](../../figures/example.png)  
+
+| Type | File / Folder | Description |
+|------|----------------|-------------|
+| **Mock Data** | [`data/events.csv`](./data/events.csv) | Synthetic dataset simulating Escaly organizations, users, and weekly activity events. |
+| **SQL Queries** | [`sql/00_setup_and_transforms.sql`](./sql/00_setup_and_transforms.sql)<br>[`sql/01_retention_analysis.sql`](./sql/01_retention_analysis.sql) | DuckDB SQL scripts to create derived tables and compute 12-week retention cohorts. |
+| **Python Scripts** | [`scripts/generate_mock_data.py`](./scripts/generate_mock_data.py)<br>[`scripts/run_retention_experiment.py`](./scripts/run_retention_experiment.py) | Utilities to generate mock events, run the full experiment, and export results/figures. |
+| **Tracking Plan Extension** | [`tracking-plan-extension.md`](./tracking-plan-extension.md) | Additive events and derived signals supporting team-based retention measurement. |
 
 ---
 
 ## 🖥 How to Run the Analysis
 
-1. **Install dependencies:**
-   ```bash
-   pip install duckdb pandas matplotlib tabulate --quiet
-   ```
-
-
-2. **Generate mock dataset (optional):**
+1. **Generate mock dataset (optional):**
     ```bash
     python case-studies/escaly-retention-cohorts/generate_mock_data.py \
       --accounts 100 \
@@ -131,24 +137,8 @@ A 12-week retention analysis was run on 86 organizations that signed up between 
       --out case-studies/escaly-retention-cohorts/data/events.csv
     ```
 
-3. **Run setup and retention analysis:**
+2. **Run setup and retention analysis:**
 
     ```bash
-    python - <<'PY'
-    import duckdb, pathlib
-
-    # Create a single connection
-    con = duckdb.connect()
-
-    # Run setup script
-    setup_sql = pathlib.Path('case-studies/escaly-retention-cohorts/sql/00_setup_and_transforms.sql').read_text()
-    df = con.execute(setup_sql).fetchdf()
-    print(df.to_markdown(index=False))
-    print("✅ Setup complete")
-
-    # Run analysis script
-    analysis_sql = pathlib.Path('case-studies/escaly-retention-cohorts/sql/01_retention_analysis.sql').read_text()
-    df = con.execute(analysis_sql).fetchdf()
-    print(df.to_markdown(index=False))
-    PY
+    python case-studies/escaly-retention-cohorts/scripts/run_retention_experiment.py
     ```
