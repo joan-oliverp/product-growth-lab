@@ -40,12 +40,14 @@ In PLG terms, *team activation* is Escaly’s equivalent of a **collaboration lo
 
 **Segmentation**
 - **Single-user orgs:** 1 active user by week 4  
-- **Multi-user orgs:** ≥ 2 active user by week 4  
+- **Multi-user orgs:** ≥ 2 active user by week 4
+
+**Note:**
+While Escaly plans to track invitation and sharing events (`user_invited`, `report_shared`) in later phases, this analysis focuses solely on observed collaboration rather than invitation intent.
 
 ---
 
 ## **Technical Specification**
-
 The detailed tracking plan for this analysis is documented separately in:  
 [`tracking-plan-extension.md`](./tracking-plan-extension.md)
 
@@ -112,3 +114,41 @@ A 12-week retention analysis was run on 86 organizations that signed up between 
 - **Figures:** ![Example Chart](../../figures/example.png)  
 
 ---
+
+## 🖥 How to Run the Analysis
+
+1. **Install dependencies:**
+   ```bash
+   pip install duckdb pandas matplotlib tabulate --quiet
+   ```
+
+
+2. **Generate mock dataset (optional):**
+    ```bash
+    python case-studies/escaly-retention-cohorts/generate_mock_data.py \
+      --accounts 100 \
+      --weeks 12 \
+      --out case-studies/escaly-retention-cohorts/data/events.csv
+    ```
+
+3. **Run setup and retention analysis:**
+
+    ```bash
+    python - <<'PY'
+    import duckdb, pathlib
+
+    # Create a single connection
+    con = duckdb.connect()
+
+    # Run setup script
+    setup_sql = pathlib.Path('case-studies/escaly-retention-cohorts/sql/00_setup_and_transforms.sql').read_text()
+    df = con.execute(setup_sql).fetchdf()
+    print(df.to_markdown(index=False))
+    print("✅ Setup complete")
+
+    # Run analysis script
+    analysis_sql = pathlib.Path('case-studies/escaly-retention-cohorts/sql/01_retention_analysis.sql').read_text()
+    df = con.execute(analysis_sql).fetchdf()
+    print(df.to_markdown(index=False))
+    PY
+    ```

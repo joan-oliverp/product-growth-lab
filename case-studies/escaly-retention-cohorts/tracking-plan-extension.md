@@ -23,6 +23,7 @@ These additions are **minor version** changes (additive, non-breaking) that enab
 
 ### 2.1 `user_invited`
 - **Authority:** client
+- **Status:** *planned (not yet active in Phase 1 analyses)*
 - **Description:** A professional invites a colleague to join their organization.
 - **Required identifiers:** `user_id`, `account_id`
 - **Properties:**

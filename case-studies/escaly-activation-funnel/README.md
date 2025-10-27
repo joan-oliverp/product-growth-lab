@@ -132,7 +132,6 @@ Activation is the **gateway metric** in product-led growth:
    pip install duckdb pandas matplotlib tabulate --quiet
    ```
 
-
 2. **Generate mock dataset (optional):**
     ```bash
     python case-studies/escaly-activation-funnel/generate_mock_data.py --n_users 1500 --out case-studies/escaly-activation-funnel/mock_data.csv

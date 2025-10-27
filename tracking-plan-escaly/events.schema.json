@@ -102,64 +102,57 @@
 
     "derived_signals": {
       "type": "object",
-      "description": "Warehouse-derived aggregates used as canonical signals in analysis (e.g., org_weekly_active).",
-      "additionalProperties": false,
       "patternProperties": {
-        "^[a-z0-9]+(_[a-z0-9]+)*$": {
+        "^[a-zA-Z0-9_]+$": {
           "type": "object",
-          "description": "Definition for a derived signal (e.g., org_weekly_active).",
-          "additionalProperties": false,
-          "required": ["authority", "definition", "identifiers", "properties"],
+          "required": ["authority", "definition", "identifiers", "properties", "qualifying_events"],
           "properties": {
             "authority": {
               "type": "string",
-              "const": "warehouse",
-              "description": "Indicates this signal is computed in the warehouse."
+              "description": "Source system or data authority (e.g., 'warehouse')."
             },
             "definition": {
               "type": "string",
-              "minLength": 10
+              "description": "Human-readable explanation of the derived signal."
             },
             "identifiers": {
               "type": "array",
-              "description": "Signal-level identifiers used for joins; must include account_id.",
-              "items": { "type": "string", "pattern": "^[a-z0-9]+(_[a-z0-9]+)*$" },
-              "minItems": 1,
-              "uniqueItems": true,
-              "allOf": [
-                { "contains": { "const": "account_id" } }
-              ]
+              "items": { "type": "string" },
+              "description": "Primary key or entity identifiers used to group signal data."
             },
             "properties": {
               "type": "object",
-              "description": "Fields emitted by this signal.",
-              "additionalProperties": true,
-              "required": ["week_start_at"],
-              "properties": {
-                "week_start_at": {
-                  "type": "string",
-                  "format": "date-time",
-                  "description": "ISO 8601 timestamp for the ISO week start (Monday 00:00:00)."
+              "minProperties": 1,
+              "additionalProperties": {
+                "type": "object",
+                "required": ["type", "description"],
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "enum": ["timestamp", "integer", "boolean", "string", "number"],
+                    "description": "The data type of the property value."
+                  },
+                  "description": {
+                    "type": "string",
+                    "description": "Description of the property and its semantics."
+                  }
                 },
-                "active_user_count": {
-                  "type": "integer",
-                  "minimum": 0
-                },
-                "has_generated_report": {
-                  "type": "boolean"
-                }
-              }
+                "additionalProperties": false
+              },
+              "description": "A map of property names to their metadata definitions."
             },
             "qualifying_events": {
               "type": "array",
-              "description": "Optional: list of source event names used to compute this signal.",
-              "items": { "type": "string", "pattern": "^[a-z0-9]+(_[a-z0-9]+)*$" },
-              "uniqueItems": true
+              "items": { "type": "string" },
+              "description": "List of event types that contribute to this derived signal."
             }
-          }
+          },
+          "additionalProperties": false
         }
-      }
-    }
+      },
+      "additionalProperties": false
+    },
+    "additionalProperties": false
   },
   "additionalProperties": true
 }
