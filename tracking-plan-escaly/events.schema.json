@@ -98,7 +98,61 @@
         },
         "additionalProperties": false
       }
-    }
+    },
+
+    "derived_signals": {
+      "type": "object",
+      "patternProperties": {
+        "^[a-zA-Z0-9_]+$": {
+          "type": "object",
+          "required": ["authority", "definition", "identifiers", "properties", "qualifying_events"],
+          "properties": {
+            "authority": {
+              "type": "string",
+              "description": "Source system or data authority (e.g., 'warehouse')."
+            },
+            "definition": {
+              "type": "string",
+              "description": "Human-readable explanation of the derived signal."
+            },
+            "identifiers": {
+              "type": "array",
+              "items": { "type": "string" },
+              "description": "Primary key or entity identifiers used to group signal data."
+            },
+            "properties": {
+              "type": "object",
+              "minProperties": 1,
+              "additionalProperties": {
+                "type": "object",
+                "required": ["type", "description"],
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "enum": ["timestamp", "integer", "boolean", "string", "number"],
+                    "description": "The data type of the property value."
+                  },
+                  "description": {
+                    "type": "string",
+                    "description": "Description of the property and its semantics."
+                  }
+                },
+                "additionalProperties": false
+              },
+              "description": "A map of property names to their metadata definitions."
+            },
+            "qualifying_events": {
+              "type": "array",
+              "items": { "type": "string" },
+              "description": "List of event types that contribute to this derived signal."
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "additionalProperties": false
   },
   "additionalProperties": true
 }

@@ -114,7 +114,7 @@ Activation is the **gateway metric** in product-led growth:
 ---
 
 ## 📂 Supporting Artifacts
-- **Tracking Plan:** [`../../tracking-plan-escaly/events.json`](../../tracking-plan-escaly/events.json)  
+- **Tracking Plan:** [`../../tracking-plan-escaly/events.v1.0.0.json`](../../tracking-plan-escaly/events.v1.0.0.json)  
 - **Business Logic:** [`../../business-logic-escaly/business-logic.md`](../../business-logic-escaly/business-logic.md)  
 - **SQL — Funnel:** [`./funnel.sql`](./funnel.sql)  
 - **SQL — Time to Activation:** [`./time_to_activation.sql`](./time_to_activation.sql)  
@@ -131,7 +131,6 @@ Activation is the **gateway metric** in product-led growth:
    ```bash
    pip install duckdb pandas matplotlib tabulate --quiet
    ```
-
 
 2. **Generate mock dataset (optional):**
     ```bash
